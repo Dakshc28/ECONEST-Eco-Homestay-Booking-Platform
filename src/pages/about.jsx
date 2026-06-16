@@ -15,6 +15,10 @@ function About() {
   promotes community-based tourism while helping homestay owners manage
   bookings and reach more travelers.
 </p>
+<p>
+  EcoNest promotes sustainable tourism and supports local communities through
+  eco-friendly homestay experiences.
+</p>
       </main>
 
       <Footer />
