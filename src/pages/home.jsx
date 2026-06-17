@@ -1,30 +1,11 @@
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import Card from "../components/Card";
-import Footer from "../components/Footer";
+<div className="flex flex-wrap justify-center gap-6 py-8">
+  <Card
+    title="Eco Homestays"
+    description="Sustainable stays in beautiful villages."
+  />
 
-function Home() {
-  return (
-    <>
-      <Navbar />
-
-      <Hero />
-
-      <div className="card-container">
-        <Card
-          title="Eco Homestays"
-          description="Stay in sustainable village homes."
-        />
-
-        <Card
-          title="Cultural Tours"
-          description="Experience local traditions and lifestyles."
-        />
-      </div>
-
-      <Footer />
-    </>
-  );
-}
-
-export default Home;
+  <Card
+    title="Village Experiences"
+    description="Explore culture, food, and local traditions."
+  />
+</div>

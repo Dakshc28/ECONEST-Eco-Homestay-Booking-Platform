@@ -1,29 +1,8 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+<main className="p-10 text-center">
+  <h1 className="text-3xl font-bold mb-4">About EcoNest</h1>
 
-function About() {
-  return (
-    <>
-      <Navbar />
-
-      <main>
-        <h1>About EcoNest</h1>
-
-<p>
-  EcoNest is a sustainable tourism platform that connects travelers with
-  eco-friendly homestays and authentic village experiences. The platform
-  promotes community-based tourism while helping homestay owners manage
-  bookings and reach more travelers.
-</p>
-<p>
-  EcoNest promotes sustainable tourism and supports local communities through
-  eco-friendly homestay experiences.
-</p>
-      </main>
-
-      <Footer />
-    </>
-  );
-}
-
-export default About;
+  <p className="max-w-2xl mx-auto">
+    EcoNest is a sustainable tourism platform that connects travelers with
+    eco-friendly homestays and authentic village experiences.
+  </p>
+</main>
