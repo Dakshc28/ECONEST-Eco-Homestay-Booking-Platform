@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
-    <section className="bg-green-100 py-20 px-6 text-center">
-      <h1 className="text-5xl font-bold text-green-900 mb-4">
+    <section className="bg-gray-100 py-20 px-6 text-center">
+      <h1 className="text-4xl md:text-6xl font-bold text-black mb-4">
         Discover Sustainable Homestays
       </h1>
 
