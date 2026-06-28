@@ -1,8 +1,30 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Hero from "../components/Hero";
 import Card from "../components/Card";
-import { Button } from "../components/ui";
+
+import { Button, Loader, Toast } from "../components/ui";
 
 export default function Home() {
+  const [homestays, setHomestays] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/homestays")
+      .then((res) => res.json())
+      .then((data) => {
+        setHomestays(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError("Unable to connect to EcoNest Backend.");
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <>
       <Hero />
@@ -17,21 +39,31 @@ export default function Home() {
           Featured Experiences
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {loading && (
+          <div className="my-10">
+            <Loader />
+          </div>
+        )}
 
-          <Card
-            title="Mountain Retreat"
-            description="Eco-friendly homestay surrounded by scenic mountain views."
-            image="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
-            action="View Details"
-          />
+        {error && (
+          <div className="flex justify-center my-6">
+            <Toast message={error} />
+          </div>
+        )}
 
-          <Card
-            title="Village Experience"
-            description="Explore local traditions, food, and sustainable tourism."
-            image="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
-            action="Explore"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          {homestays.map((stay) => (
+            <Card
+              key={stay.id}
+              title={stay.name}
+              description="Experience sustainable tourism with EcoNest."
+              location={stay.location}
+              price={stay.price}
+              ecoScore={stay.ecoScore}
+              action="View Details"
+            />
+          ))}
 
         </div>
 

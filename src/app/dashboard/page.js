@@ -1,110 +1,100 @@
 "use client";
 
-import { useState } from "react";
-import { Loader, Modal, Toast, Button } from "../../components/ui";
+import { useEffect, useState } from "react";
+
+import { Loader, Toast } from "../../components/ui";
 
 export default function Dashboard() {
-  const [showModal, setShowModal] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+  const [homestays, setHomestays] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/homestays")
+      .then((res) => res.json())
+      .then((data) => {
+        setHomestays(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError("Unable to fetch dashboard data.");
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="py-20">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="py-20 flex justify-center">
+        <Toast message={error} />
+      </div>
+    );
+  }
+
+  const totalHomestays = homestays.length;
+
+  const averagePrice =
+    homestays.reduce((sum, stay) => sum + stay.price, 0) /
+    totalHomestays;
+
+  const highestEcoScore = Math.max(
+    ...homestays.map((stay) => stay.ecoScore)
+  );
 
   return (
-    <div className="min-h-screen bg-green-50 p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="max-w-6xl mx-auto px-6 py-16">
 
-        <div className="mb-10">
-          <h1 className="text-4xl font-bold mb-2">
-            EcoNest Dashboard
-          </h1>
+      <h1 className="text-4xl font-bold mb-10">
+        EcoNest Dashboard
+      </h1>
 
-          <p className="text-gray-600">
-            Manage bookings, guests and eco-tourism activities.
+      <div className="grid md:grid-cols-3 gap-8">
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+
+          <h2 className="text-xl font-semibold">
+            Total Homestays
+          </h2>
+
+          <p className="text-4xl mt-4 font-bold text-green-700">
+            {totalHomestays}
           </p>
-        </div>
-
-        {/* Stats */}
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3>Total Bookings</h3>
-            <p className="text-3xl font-bold mt-2">124</p>
-          </div>
-
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3>Active Guests</h3>
-            <p className="text-3xl font-bold mt-2">42</p>
-          </div>
-
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3>Reviews</h3>
-            <p className="text-3xl font-bold mt-2">89</p>
-          </div>
-
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3>Eco Score</h3>
-            <p className="text-3xl font-bold mt-2">95%</p>
-          </div>
 
         </div>
 
-        {/* Loader Component */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
 
-        <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-semibold mb-4">
-            Loading Example
+          <h2 className="text-xl font-semibold">
+            Average Price
           </h2>
 
-          <Loader />
+          <p className="text-4xl mt-4 font-bold text-green-700">
+            ₹{averagePrice.toFixed(0)}
+          </p>
+
         </div>
 
-        {/* Modal Component */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
 
-        <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-semibold mb-4">
-            Booking Actions
+          <h2 className="text-xl font-semibold">
+            Highest Eco Score
           </h2>
 
-          <Button
-            text="Open Booking Modal"
-            onClick={() => setShowModal(true)}
-          />
-
-          <Modal
-            isOpen={showModal}
-            onClose={() => setShowModal(false)}
-          >
-            <h2 className="text-xl font-bold mb-3">
-              Confirm Booking
-            </h2>
-
-            <p>
-              Would you like to confirm this booking?
-            </p>
-          </Modal>
-        </div>
-
-        {/* Toast Component */}
-
-        <div className="bg-white rounded-xl shadow-md p-6">
-
-          <h2 className="text-2xl font-semibold mb-4">
-            Notifications
-          </h2>
-
-          <Button
-            text="Show Notification"
-            onClick={() => setShowToast(true)}
-          />
-
-          {showToast && (
-            <div className="mt-4">
-              <Toast message="Booking request submitted successfully!" />
-            </div>
-          )}
+          <p className="text-4xl mt-4 font-bold text-green-700">
+            {highestEcoScore}
+          </p>
 
         </div>
 
       </div>
+
     </div>
   );
 }
