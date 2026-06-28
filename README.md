@@ -1,36 +1,203 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌿 EcoNest – Eco Homestay Booking Platform
 
-## Getting Started
+## Overview
 
-First, run the development server:
+EcoNest is a full-stack web application that connects travelers with eco-friendly homestays. The platform promotes sustainable tourism by allowing users to browse environmentally friendly accommodations and explore unique travel experiences.
+
+This project was developed using **Next.js** for the frontend and **Express.js** for the backend as part of the TBI-GEU Internship Program.
+
+---
+
+# Features
+
+## Frontend
+
+* Modern responsive user interface
+* Dark / Light Mode
+* Home Page
+* Dashboard
+* About Page
+* Login Page
+* Reusable UI Components
+* Dynamic Homestay Cards
+* Loader Component
+* Toast Notifications
+
+## Backend
+
+* Express.js REST API
+* CRUD Operations
+* Search API
+* Error Handling Middleware
+* Environment Variable Support
+* Modular Folder Structure
+
+---
+
+# Tech Stack
+
+## Frontend
+
+* Next.js
+* React.js
+* Tailwind CSS
+
+## Backend
+
+* Node.js
+* Express.js
+* CORS
+* Dotenv
+
+---
+
+# Project Structure
+
+```
+ECONEST
+│
+├── backend
+│   ├── controllers
+│   ├── data
+│   ├── middleware
+│   ├── routes
+│   ├── server.js
+│   ├── package.json
+│   └── .env.example
+│
+├── public
+│
+├── src
+│   ├── app
+│   ├── components
+│   └── styles
+│
+├── package.json
+└── README.md
+```
+
+---
+
+# API Endpoints
+
+| Method | Endpoint                   | Description        |
+| ------ | -------------------------- | ------------------ |
+| GET    | `/api/homestays`           | Get all homestays  |
+| GET    | `/api/homestays/:id`       | Get homestay by ID |
+| GET    | `/api/homestays/search?q=` | Search homestays   |
+| POST   | `/api/homestays`           | Create a homestay  |
+| PUT    | `/api/homestays/:id`       | Update a homestay  |
+| DELETE | `/api/homestays/:id`       | Delete a homestay  |
+
+---
+
+# Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/Dakshc28/ECONEST-Eco-Homestay-Booking-Platform.git
+```
+
+```bash
+cd ECONEST-Eco-Homestay-Booking-Platform
+```
+
+---
+
+# Frontend Setup
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the frontend
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Frontend runs on
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# Backend Setup
 
-To learn more about Next.js, take a look at the following resources:
+Navigate to backend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cd backend
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Install dependencies
 
-## Deploy on Vercel
+```bash
+npm install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Run backend
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run dev
+```
+
+Backend runs on
+
+```
+http://localhost:5000
+```
+
+---
+
+# Environment Variables
+
+Create a `.env` file inside the `backend` folder.
+
+Example:
+
+```
+PORT=5000
+```
+
+---
+
+# Current Features
+
+* Responsive UI
+* Dynamic Home Page
+* Dashboard connected to Backend
+* REST API
+* Search Endpoint
+* CRUD Operations
+* Loading Spinner
+* Toast Notifications
+* Dark / Light Theme
+
+---
+
+# Future Improvements
+
+* MongoDB Integration
+* User Authentication
+* Booking System
+* Payment Gateway
+* AI-Based Homestay Recommendations
+* Review & Rating System
+* Image Uploads
+* Admin Dashboard
+
+---
+
+# Author
+
+**Daksh Choudhary**
+
+TBI-GEU Internship Project
+
+EcoNest – Eco Homestay Booking Platform
