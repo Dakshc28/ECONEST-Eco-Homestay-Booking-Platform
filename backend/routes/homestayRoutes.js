@@ -1,21 +1,16 @@
 const express = require("express");
 
 const {
-  getAllHomestays,
+  getHomestays,
   getHomestayById,
   createHomestay,
   updateHomestay,
   deleteHomestay,
-  searchHomestays
 } = require("../controllers/homestayController");
 
 const router = express.Router();
 
-// Search
-router.get("/search", searchHomestays);
-
-// CRUD
-router.get("/", getAllHomestays);
+router.get("/", getHomestays);
 router.get("/:id", getHomestayById);
 router.post("/", createHomestay);
 router.put("/:id", updateHomestay);

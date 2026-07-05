@@ -1,153 +1,117 @@
 # 🌿 EcoNest – Eco Homestay Booking Platform
 
-## Overview
-
-EcoNest is a full-stack web application that connects travelers with eco-friendly homestays. The platform promotes sustainable tourism by allowing users to browse environmentally friendly accommodations and explore unique travel experiences.
-
-This project was developed using **Next.js** for the frontend and **Express.js** for the backend as part of the TBI-GEU Internship Program.
+EcoNest is a full-stack web application that connects travelers with eco-friendly homestays while promoting sustainable tourism and local community experiences. This project is being developed as part of an AI-Assisted Full Stack Web Development course.
 
 ---
 
-# Features
+# 📌 Week 5 Deliverables
+
+In Week 5, the backend was upgraded from using in-memory data storage to a real cloud database using MongoDB Atlas.
+
+## ✅ Features Completed
+
+- Connected Express.js backend to MongoDB Atlas
+- Designed and implemented Homestay database schema using Mongoose
+- Migrated CRUD operations from in-memory storage to MongoDB
+- Tested all REST API endpoints using Postman
+- Implemented centralized error handling
+- Successfully integrated cloud database with backend
+
+---
+
+# 🚀 Tech Stack
 
 ## Frontend
-
-* Modern responsive user interface
-* Dark / Light Mode
-* Home Page
-* Dashboard
-* About Page
-* Login Page
-* Reusable UI Components
-* Dynamic Homestay Cards
-* Loader Component
-* Toast Notifications
+- Next.js
+- React.js
+- Tailwind CSS
 
 ## Backend
+- Node.js
+- Express.js
 
-* Express.js REST API
-* CRUD Operations
-* Search API
-* Error Handling Middleware
-* Environment Variable Support
-* Modular Folder Structure
+## Database
+- MongoDB Atlas
+- Mongoose ODM
+
+## API Testing
+- Postman
+
+## Version Control
+- Git
+- GitHub
 
 ---
 
-# Tech Stack
-
-## Frontend
-
-* Next.js
-* React.js
-* Tailwind CSS
-
-## Backend
-
-* Node.js
-* Express.js
-* CORS
-* Dotenv
-
----
-
-# Project Structure
+# 📂 Project Structure
 
 ```
-ECONEST
+econest/
 │
-├── backend
-│   ├── controllers
-│   ├── data
-│   ├── middleware
-│   ├── routes
+├── src/
+│
+├── components/
+│
+├── backend/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
 │   ├── server.js
-│   ├── package.json
-│   └── .env.example
+│   └── .env
 │
-├── public
+├── public/
 │
-├── src
-│   ├── app
-│   ├── components
-│   └── styles
-│
-├── package.json
 └── README.md
 ```
 
 ---
 
-# API Endpoints
-
-| Method | Endpoint                   | Description        |
-| ------ | -------------------------- | ------------------ |
-| GET    | `/api/homestays`           | Get all homestays  |
-| GET    | `/api/homestays/:id`       | Get homestay by ID |
-| GET    | `/api/homestays/search?q=` | Search homestays   |
-| POST   | `/api/homestays`           | Create a homestay  |
-| PUT    | `/api/homestays/:id`       | Update a homestay  |
-| DELETE | `/api/homestays/:id`       | Delete a homestay  |
-
----
-
-# Installation
+# 📦 Installation
 
 ## Clone Repository
 
 ```bash
-git clone https://github.com/Dakshc28/ECONEST-Eco-Homestay-Booking-Platform.git
+git clone <repository-url>
 ```
 
-```bash
-cd ECONEST-Eco-Homestay-Booking-Platform
-```
-
----
-
-# Frontend Setup
-
-Install dependencies
+## Install Frontend Dependencies
 
 ```bash
 npm install
 ```
 
-Run the frontend
-
-```bash
-npm run dev
-```
-
-Frontend runs on
-
-```
-http://localhost:3000
-```
-
----
-
-# Backend Setup
-
-Navigate to backend
+## Install Backend Dependencies
 
 ```bash
 cd backend
-```
-
-Install dependencies
-
-```bash
 npm install
 ```
 
-Run backend
+---
+
+# ⚙ Environment Variables
+
+Create a `.env` file inside the `backend` folder.
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+```
+
+---
+
+# ▶ Running the Application
+
+## Backend
 
 ```bash
+cd backend
 npm run dev
 ```
 
-Backend runs on
+Backend runs on:
 
 ```
 http://localhost:5000
@@ -155,49 +119,89 @@ http://localhost:5000
 
 ---
 
-# Environment Variables
+## Frontend
 
-Create a `.env` file inside the `backend` folder.
-
-Example:
-
-```
-PORT=5000
+```bash
+npm run dev
 ```
 
----
+Frontend runs on:
 
-# Current Features
-
-* Responsive UI
-* Dynamic Home Page
-* Dashboard connected to Backend
-* REST API
-* Search Endpoint
-* CRUD Operations
-* Loading Spinner
-* Toast Notifications
-* Dark / Light Theme
+```
+http://localhost:3000
+```
 
 ---
 
-# Future Improvements
+# 📡 API Endpoints
 
-* MongoDB Integration
-* User Authentication
-* Booking System
-* Payment Gateway
-* AI-Based Homestay Recommendations
-* Review & Rating System
-* Image Uploads
-* Admin Dashboard
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | /api/homestays | Get all homestays |
+| GET | /api/homestays/:id | Get homestay by ID |
+| POST | /api/homestays | Create new homestay |
+| PUT | /api/homestays/:id | Update homestay |
+| DELETE | /api/homestays/:id | Delete homestay |
 
 ---
 
-# Author
+# 🗄 Database
 
-**Daksh Choudhary**
+MongoDB Atlas is used as the cloud database.
 
-TBI-GEU Internship Project
+Current Collection:
 
-EcoNest – Eco Homestay Booking Platform
+```
+homestays
+```
+
+Current Schema Fields:
+
+- name
+- location
+- price
+- ecoScore
+- createdAt
+- updatedAt
+
+---
+
+# ✅ Testing
+
+All API endpoints were successfully tested using Postman.
+
+Implemented Operations:
+
+- Create Homestay
+- Read All Homestays
+- Read Homestay by ID
+- Update Homestay
+- Delete Homestay
+
+---
+
+# 📷 Week 5 Submission Includes
+
+- MongoDB Atlas Integration
+- Mongoose Schema
+- CRUD API
+- Postman Collection
+- ER Diagram
+- GitHub Repository
+- Project Documentation
+
+---
+
+# 👨‍💻 Developed By
+
+**Arsh Javed**
+
+B.Tech Computer Science Engineering
+
+Graphic Era University
+
+---
+
+# 📄 License
+
+This project is developed for educational purposes.
