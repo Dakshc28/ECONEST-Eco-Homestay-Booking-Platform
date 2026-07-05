@@ -190,11 +190,23 @@ Implemented Operations:
 - GitHub Repository
 - Project Documentation
 
++----------------------------------+
+|            Homestay              |
++----------------------------------+
+| _id                              |
+| name                             |
+| location                         |
+| price                            |
+| ecoScore                         |
+| createdAt                        |
+| updatedAt                        |
++----------------------------------+
+
 ---
 
 # 👨‍💻 Developed By
 
-**Arsh Javed**
+Daksh choudhary
 
 B.Tech Computer Science Engineering
 
