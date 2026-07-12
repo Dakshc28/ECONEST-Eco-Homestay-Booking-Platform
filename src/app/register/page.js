@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 
 import { Input, Button } from "../../components/ui";
 
-export default function Login() {
+export default function Register() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -23,12 +23,12 @@ export default function Login() {
     });
   };
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     setLoading(true);
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        "http://localhost:5000/api/auth/register",
         {
           method: "POST",
           headers: {
@@ -41,16 +41,13 @@ export default function Login() {
       const data = await response.json();
 
       if (!response.ok) {
-        alert(data.message || "Login failed");
+        alert(data.message || "Registration failed");
         return;
       }
 
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      alert("Registration Successful!");
 
-      alert("Login Successful!");
-
-      router.push("/dashboard");
+      router.push("/login");
     } catch (error) {
       console.error(error);
       alert("Unable to connect to server.");
@@ -59,25 +56,27 @@ export default function Login() {
     }
   };
 
-  const handleGoogleLogin = () => {
-    signIn("google", {
-      callbackUrl: "/dashboard",
-    });
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-50 px-4">
       <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
 
         <h1 className="text-3xl font-bold mb-2">
-          Welcome Back
+          Create Account
         </h1>
 
         <p className="text-gray-600 mb-6">
-          Login to access your EcoNest account.
+          Join EcoNest and explore sustainable stays.
         </p>
 
         <div className="space-y-4">
+
+          <Input
+            type="text"
+            name="name"
+            placeholder="Enter Name"
+            value={formData.name}
+            onChange={handleChange}
+          />
 
           <Input
             type="email"
@@ -96,22 +95,9 @@ export default function Login() {
           />
 
           <Button
-            text={loading ? "Logging in..." : "Login"}
-            onClick={handleLogin}
+            text={loading ? "Creating Account..." : "Register"}
+            onClick={handleRegister}
           />
-
-          <div className="flex items-center my-4">
-            <hr className="flex-grow border-gray-300" />
-            <span className="mx-3 text-gray-500">OR</span>
-            <hr className="flex-grow border-gray-300" />
-          </div>
-
-          <button
-            onClick={handleGoogleLogin}
-            className="w-full border border-gray-300 rounded-lg py-3 font-medium hover:bg-gray-100 transition"
-          >
-            Continue with Google
-          </button>
 
         </div>
 

@@ -8,12 +8,17 @@ const {
   deleteHomestay,
 } = require("../controllers/homestayController");
 
+const verifyToken = require("../middleware/authMiddleware");
+
 const router = express.Router();
 
-router.get("/", getHomestays);
+// Public Route
 router.get("/:id", getHomestayById);
-router.post("/", createHomestay);
-router.put("/:id", updateHomestay);
-router.delete("/:id", deleteHomestay);
+
+// Protected Routes
+router.get("/", verifyToken, getHomestays);
+router.post("/", verifyToken, createHomestay);
+router.put("/:id", verifyToken, updateHomestay);
+router.delete("/:id", verifyToken, deleteHomestay);
 
 module.exports = router;

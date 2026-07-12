@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import Hero from "../components/Hero";
 import Card from "../components/Card";
-
 import { Button, Loader, Toast } from "../components/ui";
 
 export default function Home() {
@@ -13,16 +12,24 @@ export default function Home() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/homestays")
-      .then((res) => res.json())
-      .then((data) => {
-        setHomestays(data);
-        setLoading(false);
-      })
-      .catch(() => {
+    async function fetchHomestays() {
+      try {
+        const response = await fetch("http://localhost:5000/api/homestays");
+        const data = await response.json();
+
+        console.log("API Response:", data);
+        console.log("Is Array:", Array.isArray(data));
+
+        setHomestays(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error(err);
         setError("Unable to connect to EcoNest Backend.");
+      } finally {
         setLoading(false);
-      });
+      }
+    }
+
+    fetchHomestays();
   }, []);
 
   return (
@@ -30,7 +37,6 @@ export default function Home() {
       <Hero />
 
       <section className="max-w-7xl mx-auto px-6 py-12">
-
         <div className="text-center mb-10">
           <Button text="Explore Eco Stays" />
         </div>
@@ -52,10 +58,9 @@ export default function Home() {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
           {homestays.map((stay) => (
             <Card
-              key={stay.id}
+              key={stay._id}
               title={stay.name}
               description="Experience sustainable tourism with EcoNest."
               location={stay.location}
@@ -64,9 +69,7 @@ export default function Home() {
               action="View Details"
             />
           ))}
-
         </div>
-
       </section>
     </>
   );

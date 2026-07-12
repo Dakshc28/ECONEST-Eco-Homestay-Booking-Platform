@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import {
   Button,
@@ -11,8 +12,22 @@ import {
 } from "../../components/ui";
 
 export default function Showcase() {
+  const router = useRouter();
+
   const [showModal, setShowModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
+    setLoading(false);
+  }, [router]);
 
   const handleToast = () => {
     setShowToast(true);
@@ -21,6 +36,14 @@ export default function Showcase() {
       setShowToast(false);
     }, 3000);
   };
+
+  if (loading) {
+    return (
+      <div className="py-20">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-green-50 px-6 py-12">
@@ -34,7 +57,6 @@ export default function Showcase() {
           Week 3 Component Library Demonstration
         </p>
 
-        {/* Button Component */}
         <div className="bg-white rounded-xl shadow-md p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">
             Button Component
@@ -46,7 +68,6 @@ export default function Showcase() {
           />
         </div>
 
-        {/* Input Component */}
         <div className="bg-white rounded-xl shadow-md p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">
             Input Component
@@ -55,7 +76,6 @@ export default function Showcase() {
           <Input placeholder="Search eco-friendly homestays..." />
         </div>
 
-        {/* Modal Component */}
         <div className="bg-white rounded-xl shadow-md p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">
             Modal Component
@@ -81,7 +101,6 @@ export default function Showcase() {
           </Modal>
         </div>
 
-        {/* Toast Component */}
         <div className="bg-white rounded-xl shadow-md p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">
             Toast Component
@@ -99,7 +118,6 @@ export default function Showcase() {
           )}
         </div>
 
-        {/* Loader Component */}
         <div className="bg-white rounded-xl shadow-md p-6">
           <h2 className="text-2xl font-semibold mb-4">
             Loader Component

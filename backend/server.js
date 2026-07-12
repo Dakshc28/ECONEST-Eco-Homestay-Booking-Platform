@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const authRoutes = require("./routes/authRoutes");
 const express = require("express");
 const cors = require("cors");
 
@@ -18,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/homestays", homestayRoutes);
+app.use("/api/auth", authRoutes);
 
 app.use(errorHandler);
 
