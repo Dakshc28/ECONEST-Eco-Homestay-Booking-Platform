@@ -1,9 +1,15 @@
-const dns = require("dns");
+require("dotenv").config();
 
-dns.resolveSrv("_mongodb._tcp.cluster0.apqbx0z.mongodb.net", (err, records) => {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log(records);
-  }
-});
+const { GoogleGenAI } = require("@google/genai");
+
+async function main() {
+  const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY,
+  });
+
+  const models = await ai.models.list();
+
+  console.log(models);
+}
+
+main().catch(console.error);

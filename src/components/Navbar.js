@@ -47,6 +47,7 @@ export default function Navbar() {
         <div className="flex flex-wrap gap-4 items-center">
 
           <Link href="/">Home</Link>
+          <Link href="/ai">AI Planner</Link>
 
           <Link href="/about">About</Link>
 

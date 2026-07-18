@@ -217,3 +217,29 @@ Graphic Era University
 # 📄 License
 
 This project is developed for educational purposes.
+## Authentication
+
+EcoNest provides two authentication methods:
+
+### JWT Authentication
+- User Registration
+- User Login
+- Password Hashing using bcrypt
+- JWT Token Generation
+- Protected API Routes
+- Logout functionality
+
+### Google OAuth Authentication
+- Google Sign-In using Auth.js
+- Secure OAuth 2.0 authentication
+- Automatic session management
+- Redirect to dashboard after successful login
+## AI Trip Planner
+
+Features:
+
+- Personalized eco-friendly travel plans
+- Powered by Google Gemini
+- Backend Express API
+- Secure API key using .env
+- Loading and error handling
