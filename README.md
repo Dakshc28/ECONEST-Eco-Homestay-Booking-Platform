@@ -243,3 +243,71 @@ Features:
 - Backend Express API
 - Secure API key using .env
 - Loading and error handling
+# EcoNest
+
+EcoNest is a full-stack sustainable tourism platform that allows authenticated users to manage eco-friendly homestays.
+
+## Features
+
+- User Authentication (JWT)
+- Protected Dashboard
+- Create, Read, Update and Delete Homestays
+- AI-powered Eco Travel Assistant
+- Responsive Design
+- Loading Indicators
+- Toast Notifications
+- Client-side Validation
+- React Error Boundary
+
+## Tech Stack
+
+### Frontend
+- Next.js
+- React
+- Tailwind CSS
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- JWT Authentication
+
+## Installation
+
+Clone the repository
+
+```bash
+git clone <repository-url>
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the frontend
+
+```bash
+npm run dev
+```
+
+Run the backend
+
+```bash
+npm start
+```
+
+## Project Structure
+
+```
+src/
+ ├── app/
+ ├── components/
+ ├── styles/
+ └── ...
+```
+
+## Author
+
+Daksh choudhary
