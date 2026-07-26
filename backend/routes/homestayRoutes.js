@@ -12,11 +12,15 @@ const verifyToken = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Public Route
+// =============================
+// Public Routes
+// =============================
+router.get("/", getHomestays);
 router.get("/:id", getHomestayById);
 
+// =============================
 // Protected Routes
-router.get("/", verifyToken, getHomestays);
+// =============================
 router.post("/", verifyToken, createHomestay);
 router.put("/:id", verifyToken, updateHomestay);
 router.delete("/:id", verifyToken, deleteHomestay);

@@ -6,9 +6,12 @@ export default function Card({
   location,
   price,
   ecoScore,
+  onAction,
+  onEdit,
+  onDelete,
 }) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition hover:shadow-lg">
 
       <img
         src={
@@ -25,9 +28,11 @@ export default function Card({
           {title}
         </h2>
 
-        <p className="text-gray-600 dark:text-gray-300 mt-2">
-          {description}
-        </p>
+        {description && (
+          <p className="text-gray-600 dark:text-gray-300 mt-2">
+            {description}
+          </p>
+        )}
 
         <div className="mt-4 space-y-2">
 
@@ -45,10 +50,41 @@ export default function Card({
 
         </div>
 
+        {/* Showcase Button */}
+
         {action && (
-          <button className="mt-5 bg-green-700 hover:bg-green-800 text-white px-5 py-2 rounded-lg transition">
+          <button
+            onClick={onAction}
+            className="mt-5 w-full bg-green-700 hover:bg-green-800 text-white py-2 rounded-lg transition"
+          >
             {action}
           </button>
+        )}
+
+        {/* Dashboard Buttons */}
+
+        {(onEdit || onDelete) && (
+          <div className="flex gap-3 mt-5">
+
+            {onEdit && (
+              <button
+                onClick={onEdit}
+                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition"
+              >
+                Edit
+              </button>
+            )}
+
+            {onDelete && (
+              <button
+                onClick={onDelete}
+                className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition"
+              >
+                Delete
+              </button>
+            )}
+
+          </div>
         )}
 
       </div>
