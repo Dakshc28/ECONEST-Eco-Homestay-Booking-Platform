@@ -19,7 +19,7 @@ export default function AITripPlanner() {
     setResult("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/ai/trip-planner", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ai/trip-planner`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

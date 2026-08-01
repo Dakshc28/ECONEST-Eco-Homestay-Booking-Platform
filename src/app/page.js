@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchHomestays() {
       try {
-        const response = await fetch("http://localhost:5000/api/homestays");
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/homestays`);
         const data = await response.json();
 
         console.log("API Response:", data);

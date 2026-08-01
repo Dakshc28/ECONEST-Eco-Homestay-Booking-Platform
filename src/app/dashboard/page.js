@@ -31,7 +31,7 @@ export default function Dashboard() {
 
   const fetchHomestays = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/homestays", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/homestays`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -114,9 +114,8 @@ export default function Dashboard() {
 
     try {
       const url = editingId
-        ? `http://localhost:5000/api/homestays/${editingId}`
-        : "http://localhost:5000/api/homestays";
-
+  ? `${process.env.NEXT_PUBLIC_API_URL}/api/homestays/${editingId}`
+  : `${process.env.NEXT_PUBLIC_API_URL}/api/homestays`;
       const method = editingId ? "PUT" : "POST";
 
       const res = await fetch(url, {
