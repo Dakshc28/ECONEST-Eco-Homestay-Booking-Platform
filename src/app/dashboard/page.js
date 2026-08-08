@@ -12,7 +12,6 @@ export default function Dashboard() {
   const [homestays, setHomestays] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
   const [message, setMessage] = useState("");
 
   const [editingId, setEditingId] = useState(null);
@@ -31,11 +30,14 @@ export default function Dashboard() {
 
   const fetchHomestays = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/homestays`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/homestays`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (res.status === 401) {
         localStorage.removeItem("token");
@@ -92,6 +94,7 @@ export default function Dashboard() {
     const price = Number(formData.price);
     const ecoScore = Number(formData.ecoScore);
 
+    // Validation
     if (!name) {
       setError("Homestay name is required.");
       return;
@@ -102,20 +105,25 @@ export default function Dashboard() {
       return;
     }
 
-    if (isNaN(price) || price <= 0) {
+    if (Number.isNaN(price) || price <= 0) {
       setError("Price must be greater than 0.");
       return;
     }
 
-    if (isNaN(ecoScore) || ecoScore < 0 || ecoScore > 100) {
+    if (
+      Number.isNaN(ecoScore) ||
+      ecoScore < 0 ||
+      ecoScore > 100
+    ) {
       setError("Eco Score must be between 0 and 100.");
       return;
     }
 
     try {
       const url = editingId
-  ? `${process.env.NEXT_PUBLIC_API_URL}/api/homestays/${editingId}`
-  : `${process.env.NEXT_PUBLIC_API_URL}/api/homestays`;
+        ? `${process.env.NEXT_PUBLIC_API_URL}/api/homestays/${editingId}`
+        : `${process.env.NEXT_PUBLIC_API_URL}/api/homestays`;
+
       const method = editingId ? "PUT" : "POST";
 
       const res = await fetch(url, {
@@ -132,6 +140,13 @@ export default function Dashboard() {
         }),
       });
 
+      if (res.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        router.push("/login");
+        return;
+      }
+
       if (!res.ok) {
         throw new Error();
       }
@@ -144,7 +159,7 @@ export default function Dashboard() {
 
       clearForm();
 
-      fetchHomestays();
+      await fetchHomestays();
     } catch {
       setError("Operation failed.");
     }
@@ -154,10 +169,10 @@ export default function Dashboard() {
     setEditingId(stay._id);
 
     setFormData({
-      name: stay.name,
-      location: stay.location,
-      price: stay.price,
-      ecoScore: stay.ecoScore,
+      name: stay.name || "",
+      location: stay.location || "",
+      price: stay.price ?? "",
+      ecoScore: stay.ecoScore ?? "",
     });
 
     window.scrollTo({
@@ -171,22 +186,40 @@ export default function Dashboard() {
       return;
     }
 
+    setError("");
+    setMessage("");
+
     try {
-      await fetch(`http://localhost:5000/api/homestays/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/homestays/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      setMessage("Homestay deleted.");
+      if (res.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        router.push("/login");
+        return;
+      }
 
-      fetchHomestays();
+      if (!res.ok) {
+        throw new Error();
+      }
+
+      setMessage("Homestay deleted successfully.");
+
+      await fetchHomestays();
     } catch {
       setError("Delete failed.");
     }
   };
-    if (loading) {
+
+  if (loading) {
     return (
       <div className="py-20">
         <Loader />
@@ -198,13 +231,17 @@ export default function Dashboard() {
 
   const averagePrice =
     totalHomestays > 0
-      ? homestays.reduce((sum, stay) => sum + Number(stay.price), 0) /
-        totalHomestays
+      ? homestays.reduce(
+          (sum, stay) => sum + Number(stay.price),
+          0
+        ) / totalHomestays
       : 0;
 
   const highestEcoScore =
     totalHomestays > 0
-      ? Math.max(...homestays.map((stay) => Number(stay.ecoScore)))
+      ? Math.max(
+          ...homestays.map((stay) => Number(stay.ecoScore))
+        )
       : 0;
 
   return (
@@ -254,16 +291,14 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Form */}
+      {/* Create / Update Form */}
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 mb-12">
 
         <h2 className="text-2xl font-bold mb-6">
-
           {editingId
             ? "Update Homestay"
             : "Add New Homestay"}
-
         </h2>
 
         <form
@@ -297,6 +332,7 @@ export default function Dashboard() {
             placeholder="Price"
             value={formData.price}
             onChange={handleChange}
+            min="1"
             required
             className="border rounded-lg p-3"
           />
@@ -307,6 +343,8 @@ export default function Dashboard() {
             placeholder="Eco Score"
             value={formData.ecoScore}
             onChange={handleChange}
+            min="0"
+            max="100"
             required
             className="border rounded-lg p-3"
           />
@@ -317,11 +355,12 @@ export default function Dashboard() {
               type="submit"
               className="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded-lg transition"
             >
-              {editingId ? "Update Homestay" : "Create Homestay"}
+              {editingId
+                ? "Update Homestay"
+                : "Create Homestay"}
             </button>
 
             {editingId && (
-
               <button
                 type="button"
                 onClick={clearForm}
@@ -329,7 +368,6 @@ export default function Dashboard() {
               >
                 Cancel
               </button>
-
             )}
 
           </div>
@@ -363,7 +401,6 @@ export default function Dashboard() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
           {homestays.map((stay) => (
-
             <Card
               key={stay._id}
               title={stay.name}
@@ -374,7 +411,6 @@ export default function Dashboard() {
               onEdit={() => handleEdit(stay)}
               onDelete={() => handleDelete(stay._id)}
             />
-
           ))}
 
         </div>
